@@ -57,30 +57,30 @@ class MatrixWidget(QtWidgets.QWidget):
                 self._cells[r][c].setWhatsThis(str(r)+" "+str(c))
 
                 layout.addWidget(self._cells[r][c],r+1,c+1)
-                layout.addItem(QtWidgets.QSpacerItem(0, 5, QtWidgets.QSizePolicy.Minimum, \
-                        QtWidgets.QSizePolicy.Expanding), 0, c+1)
-            layout.addItem(QtWidgets.QSpacerItem(0, 5, QtWidgets.QSizePolicy.Expanding), \
-                    r+1, bits+2)
+                #layout.addItem(QtWidgets.QSpacerItem(0, 5, QtWidgets.QSizePolicy.Minimum, \
+                        #QtWidgets.QSizePolicy.Expanding), 0, c+1)
+            #layout.addItem(QtWidgets.QSpacerItem(0, 5, QtWidgets.QSizePolicy.Expanding), \
+                    #r+1, bits+2)
 
         lblFont = QtGui.QFont()
         lblFont.setPointSize(7)
 
-        for w in range(1,words+1):
-            layout.addItem(QtWidgets.QSpacerItem(0, 5, QtWidgets.QSizePolicy.Expanding), \
-                    w, 0)
-            lbl = QtWidgets.QLabel()
-            lbl.setText("%s " % w)
-            lbl.setFont(lblFont)
-            lbl.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
-            layout.addWidget(lbl, w+1, 1)
+#        for w in range(1,words+1):
+#            layout.addItem(QtWidgets.QSpacerItem(0, 5, QtWidgets.QSizePolicy.Expanding), \
+#                    w, 0)
+#            lbl = QtWidgets.QLabel()
+#            lbl.setText("%s " % w)
+#            lbl.setFont(lblFont)
+#            lbl.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
+#            layout.addWidget(lbl, w+1, 1)
 
-        for b in range(1,bits+1):
-            layout.addItem(QtWidgets.QSpacerItem(0, 5, QtWidgets.QSizePolicy.Minimum, \
-                    QtWidgets.QSizePolicy.Expanding), words+3, b+1)
-            lbl = QtWidgets.QLabel()
-            lbl.setText("%d" % b)
-            lbl.setFont(lblFont)
-            lbl.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
-            layout.addWidget(lbl, words+2, b+1)
+#        for b in range(1,bits+1):
+#            layout.addItem(QtWidgets.QSpacerItem(0, 5, QtWidgets.QSizePolicy.Minimum, \
+#                    QtWidgets.QSizePolicy.Expanding), words+3, b+1)
+#            lbl = QtWidgets.QLabel()
+#            lbl.setText("%d" % b)
+#            lbl.setFont(lblFont)
+#            lbl.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+#            layout.addWidget(lbl, words+2, b+1)
 
         return layout

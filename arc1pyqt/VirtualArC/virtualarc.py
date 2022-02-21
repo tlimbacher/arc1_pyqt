@@ -16,7 +16,8 @@ class VirtualArC(Instrument):
 
     def __init__(self):
         self.port="not none"
-        self.crossbar=[[] for x in range(33)]
+        #self.crossbar=[[] for x in range(101)]
+        self.crossbar=[[] for x in range(501)]
         self.counter=0
         self.w=0
         self.b=0
@@ -28,13 +29,15 @@ class VirtualArC(Instrument):
         self.initialise()
 
     def initialise(self):
-        for w in range(32+1):
+        #for w in range(100+1):
+        for w in range(500+1):
             self.crossbar[w].append(0)
-            for b in range(32):
+            #for b in range(100+1):
+            for b in range(500+1):
                 #mx=memristor(Ap=11.483, An=-0.17658, tp=1.731, tn=1.298, a0p=5055, a0n=7586, a1p=-139, a1n=4027)
                 mx=memristor(Ap=11.483, An=-11.483, tp=1.731, tn=1.731, a0p=9000, a0n=5000, a1p=500, a1n=500)
                 #mx.initialise(mx.Ron+5e5+(1-2*np.random.rand())*5e5)
-                mx.initialise(5e3+(1-1.25*np.random.rand())*3e3)
+                mx.initialise(7000+(np.random.rand()-0.5)*4000)
                 self.crossbar[w].append(mx)
 
     def base_readline(self):
@@ -801,18 +804,20 @@ class VirtualArC(Instrument):
 def pulse(crossbar, w, b, ampl, pw, dt):
     global write_scheme
 
-    b_inactive=list(range(1,33))
+    #b_inactive=list(range(1,101))
+    b_inactive=list(range(1,501))
     b_inactive.remove(b)
 
-    w_inactive=list(range(1,33))
+    #w_inactive=list(range(1,101))
+    w_inactive=list(range(1,501))
     w_inactive.remove(w)
 
     for timestep in range(int(pw/dt)):
         crossbar[w][b].step_dt(ampl,dt)
-        for i in b_inactive:
-            crossbar[w][i].step_dt(ampl/2, dt)
-        for i in w_inactive:
-            crossbar[i][b].step_dt(ampl/2, dt)
+        #for i in b_inactive:
+        #    crossbar[w][i].step_dt(ampl/2, dt)
+        #for i in w_inactive:
+        #    crossbar[i][b].step_dt(ampl/2, dt)
     return crossbar
 
 
@@ -820,4 +825,3 @@ def read(crossbar, w, b):
     global readNoise
     Rmem=crossbar[w][b].Rmem
     return Rmem+readNoise*Rmem*(2*np.random.random()-1)
-

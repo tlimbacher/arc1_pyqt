@@ -316,9 +316,9 @@ class BaseProgPanel(QtWidgets.QWidget):
         self.threadWrapper.moveToThread(self.thread)
         self.thread.started.connect(entrypoint)
         self.threadWrapper.finished.connect(self.thread.quit)
-        self.threadWrapper.sendData.connect(functions.updateHistory)
-        self.threadWrapper.highlight.connect(functions.cbAntenna.cast)
-        self.threadWrapper.displayData.connect(functions.displayUpdate.cast)
+        #self.threadWrapper.sendData.connect(functions.updateHistory)
+        #self.threadWrapper.highlight.connect(functions.cbAntenna.cast)
+        #self.threadWrapper.displayData.connect(functions.displayUpdate.cast)
         if not deferredUpdate:
             self.threadWrapper.updateTree.connect(\
                 functions.historyTreeAntenna.updateTree.emit)
@@ -485,4 +485,10 @@ class BaseThreadWrapper(QtCore.QObject):
             self.displayData.emit()
         return inner
 
-
+    def runner_no_display(func):
+        def inner(self):
+            self.disableInterface.emit(True)
+            func(self)
+            self.disableInterface.emit(False)
+            self.finished.emit()
+        return inner

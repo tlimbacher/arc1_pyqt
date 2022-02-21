@@ -31,6 +31,7 @@ class ParametricDevice:
             return self.hstep(self.r_V(V) - R)*np.power((self.r_V(V) - R), 2)
         else:
             return self.hstep(R - self.r_V(V))*np.power((R - self.r_V(V)), 2)
+        #print('r_v:', self.r_V(V))
 
     def s_V(self, V):
         if V > 0:
@@ -41,6 +42,6 @@ class ParametricDevice:
     def step_dt(self, Vm, dt):
 
         dR = self.s_V(Vm) * self.f_V(self.Rmem, Vm) * dt
-
+        #if dR == 0:
+            #print('S_v: %f, f_v: %f, dt: %f, dR: %f' % (self.s_V(Vm), self.f_V(self.Rmem, Vm), dt, dR))
         self.Rmem = self.Rmem + dR
-

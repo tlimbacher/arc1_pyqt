@@ -17,7 +17,8 @@ class Crossbar:
     word = 1
     bit = 1
     limits = { 'words': (1, 1), 'bits': (1, 1) }
-    history = [[[] for bit in range(33)] for word in range(33)]
+    #history = [[[] for bit in range(101)] for word in range(101)]
+    history = history = [[[] for bit in range(501)] for word in range(501)]
     checkSA = False
     customArray = []
     startTags = {}
@@ -35,6 +36,10 @@ class Crossbar:
             key = '%s,%s' % (w,b)
             if key in self.startTags.keys() and len(self.startTags[key]) > 0:
                 startIdx = self.startTags[key].pop()
+        print('w, b:', w, b)
+        print('length of history:', len(self.history))
+        print('width of history:', len(self.history[0]))
+        print('size of history:', len(self.history)*len(self.history[0]))
         self.history[w][b].append([*args, startIdx])
 
     def addStartTag(self, w, b, idx):
@@ -115,6 +120,7 @@ class Hardware:
 # state variables
 app = Application()
 crossbar = Crossbar()
+print('crossbar length:', len(crossbar.history[0]))
 hardware = Hardware()
 
 from .Globals import functions

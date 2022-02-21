@@ -8,8 +8,10 @@ import struct
 
 @dataclass
 class HWConfig:
-    words: int = 32
-    bits: int = 32
+    #words: int = 100
+    words: int = 500
+    #bits: int = 100
+    bits: int = 500
     cycles: int = 50
     readmode: int = 2
     sessionmode: int = 0

@@ -336,8 +336,10 @@ class ManualOpsWidget(QtWidgets.QWidget):
     def toggleSA(self, event):
         if (event == 0):
             CB.checkSA = False
-            for w in range(1,33):
-                for b in range(1,33):
+            #for w in range(1,33):
+            for w in range(1,501):
+                #for b in range(1,33):
+                for b in range(1,501):
                     functions.SAantenna.enable.emit(w,b)
         else:
             if (CB.customArray):
@@ -346,8 +348,10 @@ class ManualOpsWidget(QtWidgets.QWidget):
                 functions.cbAntenna.selectDeviceSignal.emit(CB.customArray[0][0], \
                         CB.customArray[0][1])
                 functions.displayUpdate.updateSignal_short.emit()
-                for w in range(1,33):
-                    for b in range(1,33):
+                #for w in range(1,33):
+                for w in range(1,501):
+                    #for b in range(1,33):
+                    for b in range(1,501):
                         functions.SAantenna.disable.emit(w,b)
 
                 for cell in CB.customArray:
@@ -356,8 +360,10 @@ class ManualOpsWidget(QtWidgets.QWidget):
             else:
                 if self.findSAfile() == True:
                     CB.checkSA = True
-                    for w in range(1,33):
-                        for b in range(1,33):
+                    #for w in range(1,33):
+                    for w in range(1,501):
+                        #for b in range(1,33):
+                        for b in range(1,501):    
                             functions.SAantenna.disable.emit(w,b)
 
                     for cell in CB.customArray:
@@ -550,4 +556,3 @@ class ManualOpsWidget(QtWidgets.QWidget):
 
     def updatePoints(self, how_many):
         APP.displayPoints = how_many
-

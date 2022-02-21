@@ -92,9 +92,9 @@ class Arcontrol(QtWidgets.QMainWindow):
         # Setup menubar
         menuBar = self.menuBar()
 
-        fileMenu = menuBar.addMenu('File')			# File menu
-        settingsMenu = menuBar.addMenu('Settings')	# Settings menu
-        helpMenu = menuBar.addMenu('Help')			# help menu
+        fileMenu = menuBar.addMenu('File')          # File menu
+        settingsMenu = menuBar.addMenu('Settings')  # Settings menu
+        helpMenu = menuBar.addMenu('Help')          # help menu
 
         # Define the actions of each menu item before adding them to the menu
         # 1) File Menu
@@ -704,8 +704,10 @@ class Arcontrol(QtWidgets.QMainWindow):
 
             return False
         else:
-            for w in range(1,33):
-                for b in range(1,33):
+            #for w in range(1,33):
+            for w in range(1,501):
+                #for b in range(1,33):
+                for b in range(1,501):
                     if CB.history[w][b]:
                         functions.cbAntenna.recolor.emit(CB.history[w][b][-1][0],w,b)
 
@@ -714,7 +716,8 @@ class Arcontrol(QtWidgets.QMainWindow):
             return True
 
     def deleteAllData(self):
-        CB.history=[[[] for bit in range(33)] for word in range(33)]
+        #CB.history=[[[] for bit in range(101)] for word in range(101)]
+        CB.history=[[[] for bit in range(501)] for word in range(501)]
 
         if CB.customArray:
             for w in range(1,HW.conf.words+1):
