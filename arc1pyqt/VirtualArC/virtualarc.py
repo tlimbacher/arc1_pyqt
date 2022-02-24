@@ -801,7 +801,7 @@ class VirtualArC(Instrument):
         self.q_out.put(str(pw)+"\n", True)
 
 
-def pulse(crossbar, w, b, ampl, pw, dt):
+def pulse(crossbar, w, b, ampl, pw, dt, selector = 'disabled'):
     global write_scheme
 
     #b_inactive=list(range(1,101))
@@ -814,14 +814,17 @@ def pulse(crossbar, w, b, ampl, pw, dt):
 
     for timestep in range(int(pw/dt)):
         crossbar[w][b].step_dt(ampl,dt)
-        #for i in b_inactive:
-        #    crossbar[w][i].step_dt(ampl/2, dt)
-        #for i in w_inactive:
-        #    crossbar[i][b].step_dt(ampl/2, dt)
+        if selector != 'disabled':
+            for i in b_inactive:
+                crossbar[w][i].step_dt(ampl/2, dt)
+            for i in w_inactive:
+                crossbar[i][b].step_dt(ampl/2, dt)
     return crossbar
 
 
-def read(crossbar, w, b):
+def read(crossbar, w, b, Readout = 'disabled', Vread = 0.5, pw_read = 0.000001):
     global readNoise
+    if Readout != 'disabled':
+        crossbar[w][b].step_dt(Vread,pw_read)
     Rmem=crossbar[w][b].Rmem
     return Rmem+readNoise*Rmem*(2*np.random.random()-1)
