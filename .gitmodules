@@ -1,0 +1,3 @@
+[submodule "arc1pyqt/ProgPanels/NeuroPack"]
+	path = arc1pyqt/ProgPanels/NeuroPack
+	url = git@github.com:tlimbacher/NeuroPack.git
