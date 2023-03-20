@@ -12,7 +12,7 @@ from ..Globals import fonts
 class MatrixWidget(QtWidgets.QWidget):
 
     def __init__(self, words=HW.conf.words, bits=HW.conf.bits, passive=False,\
-            width=(22,50), height=(14,50), parent=None):
+            width=(10,50), height=(10,50), parent=None):
         super().__init__(parent=parent)
         # if passive no events will be emitted
         self.passive = passive

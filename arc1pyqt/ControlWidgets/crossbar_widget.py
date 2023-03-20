@@ -80,7 +80,7 @@ class CrossbarWidget(QtWidgets.QWidget):
             colorBarLeft.addWidget(aux)
 
         # Create Tick labels
-        resTicks=['100M','10M','1M','100k','10k','1k','100']
+        resTicks=['12k','-','-','5k','-','-','2k']
         resTicksLabels=[]
         for i in range(len(resTicks)):
             aux=QtWidgets.QLabel(self)
