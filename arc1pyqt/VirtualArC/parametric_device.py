@@ -4,7 +4,6 @@ import collections
 class ParametricDevice:
 
     def __init__(self, Ap, An, a0p, a1p, a0n, a1n, tp, tn):
-
         self.Ap = Ap
         self.An = An
         self.a0p = a0p
@@ -13,12 +12,13 @@ class ParametricDevice:
         self.a1n = a1n
         self.tp = tp
         self.tn = tn
+        self.Rmem = 0
 
     def initialise(self, Rinit):
         self.Rmem = Rinit
 
     def hstep(self, param):
-        return np.piecewise(param, [ param <= 0, param > 0 ], [0, 1])
+        return 0 if param <= 0 else 1
 
     def r_V(self, V):
         if V > 0:
@@ -28,10 +28,9 @@ class ParametricDevice:
 
     def f_V(self, R, V):
         if V > 0:
-            return self.hstep(self.r_V(V) - R)*np.power((self.r_V(V) - R), 2)
+            return self.hstep(self.r_V(V) - R)*(self.r_V(V) - R)*(self.r_V(V) - R)
         else:
-            return self.hstep(R - self.r_V(V))*np.power((R - self.r_V(V)), 2)
-        #print('r_v:', self.r_V(V))
+            return self.hstep(R - self.r_V(V))*(R - self.r_V(V))*(R - self.r_V(V))
 
     def s_V(self, V):
         if V > 0:
@@ -40,8 +39,5 @@ class ParametricDevice:
             return self.An * (-1 + np.exp(np.abs(V)/self.tn))
 
     def step_dt(self, Vm, dt):
-
         dR = self.s_V(Vm) * self.f_V(self.Rmem, Vm) * dt
-        #if dR == 0:
-            #print('S_v: %f, f_v: %f, dt: %f, dR: %f' % (self.s_V(Vm), self.f_V(self.Rmem, Vm), dt, dR))
         self.Rmem = self.Rmem + dR

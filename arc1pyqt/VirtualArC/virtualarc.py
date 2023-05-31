@@ -805,11 +805,11 @@ def pulse(crossbar, w, b, ampl, pw, dt, selector = 'disabled'):
     global write_scheme
 
     #b_inactive=list(range(1,101))
-    b_inactive=list(range(1,501))
+    b_inactive=list(range(1,1101))
     b_inactive.remove(b)
 
     #w_inactive=list(range(1,101))
-    w_inactive=list(range(1,501))
+    w_inactive=list(range(1,1101))
     w_inactive.remove(w)
 
     for timestep in range(int(pw/dt)):
